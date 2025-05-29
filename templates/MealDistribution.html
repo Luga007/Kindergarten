@@ -1,0 +1,480 @@
+{% extends 'base.html'%}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block header %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Projects</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+{% endblock header %}
+
+{% block content %}
+<div class="wrapper">
+    <!-- Navbar -->
+     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="index3.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="#" class="nav-link">Contact</a>
+            </li>
+
+
+        </ul>
+
+        <!-- SEARCH FORM -->
+
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+            <a class="nav-link" href="{% url 'check_inventory_and_alert' %}">
+                <i class="far fa-comments"></i>
+            </a>
+
+
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <span class="dropdown-item dropdown-header">15 Notifications</span>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-envelope mr-2"></i> 4 new messages
+                    <span class="float-right text-muted text-sm">3 mins</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-users mr-2"></i> 8 friend requests
+                    <span class="float-right text-muted text-sm">12 hours</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-file mr-2"></i> 3 new reports
+                    <span class="float-right text-muted text-sm">2 days</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+            </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                    <i class="fas fa-th-large"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background: #191c1c">
+        <!-- Brand Logo -->
+        <a href="../../index3.html" class="brand-link">
+            <img src="{% static 'img/logo-template-for-children-s-business-kindergarten-school-training-vector.jpg' %}"
+                 alt="AdminLTE Logo"
+                 class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">Kindergarten</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="{% static 'img/medieval-knight-armor_1308-174955.avif' %}" class="img-circle elevation-2"
+                         alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block">Alexander Pierce</a>
+                </div>
+            </div>
+
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <li class="nav-item">
+                        <a href="{% url 'index' %}" class="nav-link">
+                            <i class="nav-icon fas fa-home"></i>
+                            <p>
+                                Main page
+                            </p>
+                        </a>
+                    </li>
+                    {% if user_role == 'admin' %}
+                    <li class="nav-item">
+                        <a href="{% url 'caretakerpage' %}" class="nav-link">
+                            <i class="nav-icon fas fas fa-user-nurse"></i>
+                            <p>
+                                Caretaker page
+                            </p>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if user_role == 'caretaker' or user_role == 'admin' %}
+
+                    <li class="nav-item">
+                        <a href="{% url 'kids_page' %}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Kids page
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'parent_page' %}" class="nav-link">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <p>
+                                Parent page
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'attendance_page' %}" class="nav-link">
+                            <i class="nav-icon fas 	fa-clipboard-check"></i>
+                            <p>
+                                Attendance page
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'group_data_page' %}" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Group page
+                            </p>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if user_role == 'chief' or user_role == 'admin' %}
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-box"></i>
+                            <p>
+                                Product pages
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'mealData' %}" class="nav-link">
+                                    <i class="nav-icon fas fa-utensils"></i>
+                                    <p>Meal page</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'mealIngredientPage' %}" class="nav-link">
+                                    <i class="fas fa-seedling"></i>
+                                    <p>Meal Ingredient page</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'ingredientPage' %}" class="nav-link">
+                                    <i class="nav-icon fas fa-carrot"></i>
+                                    <p>Ingredient page </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'mealDistribution' %}" class="nav-link">
+                                    <i class="nav-icon fas fa-concierge-bell"></i>
+                                    <p>MealDistribution</p>
+                                </a>
+                            </li>
+                        </ul>
+                    <li class="nav-item">
+                        <a href="{% url 'cookMealView' %}" class="nav-link">
+                            <i class="fas fa-hotdog"></i>
+                            <p>Cooking Meal</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'inventory_page' %}" class="nav-link">
+                            <i class="nav-icon fas fa-boxes"></i>
+                            <p>
+                                Inventory page
+                            </p>
+                        </a>
+                    </li>
+                    {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>MealDistribution</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">MealDistributions</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">MealDistribution</h3>
+
+
+                </div>
+                <div class="card-body p-0">
+                    <div class="mb-3 d-flex justify-content-end">
+                        <button class="btn btn-success" data-toggle="modal" style="background: #198754"
+                                data-target="#createMealDistributionModal">
+                            <i class="fas fa-plus"></i> Create Meal Distribution
+                        </button>
+                    </div>
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th style="width: 3%; background: #191c1c">#</th>
+                            <th style="width: 15%;background: #191c1c">Meal</th>
+                            <th style="width: 12%; background: #191c1c">group</th>
+                            <th style="width: 15%; background: #191c1c">Served by</th>
+                            <th style="width: 20%; background: #191c1c">Served Date</th>
+                            <th style="width: 12%; background: #191c1c">Served day</th>
+                            <th style="width: 12%; background: #191c1c">Note</th>
+                            <th style="width: 10%; background: #191c1c">action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for mealDistribution in mealDistributions %}
+                        <tr>
+                            <td>{{ mealDistribution.id }}</td>
+                            <td>{{ mealDistribution.meal }}</td>
+                            <td>{{ mealDistribution.group }}</td>
+                            <td>{{ mealDistribution.served_by }}</td>
+                            <td>{{ mealDistribution.served_date }}</td>
+                            <td>{{ mealDistribution.served_day }}</td>
+                            <td>{{ mealDistribution.notes }}</td>
+
+                            <td class="text-center">
+                                <a href="?edit_mealDistribution_id={{ mealDistribution.id }}"
+                                   class="btn btn-sm btn-info">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal"
+                                   data-id="{{ mealDistribution.id }}" data-meal="{{ mealDistribution.meal.name }}"
+                                   data-url="{% url 'deleteMealDistribution' mealDistribution.id %}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+
+
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0-rc
+        </div>
+        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!--Modal-Create-->
+    <div class="modal fade" id="createMealDistributionModal" tabindex="-1" role="dialog"
+         aria-labelledby="createMealDistributionModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form method="POST" action="{% url 'mealDistribution' %}">
+                {% csrf_token %}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createMealDistributionModalLabel">Create a new Meal
+                            Distribution</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label>Meal Name</label>
+                        {{ create_form.meal|add_class:"form-control" }}
+                        <label>Group</label>
+                        {{ create_form.group|add_class:"form-control" }}
+                        <label>Served by</label>
+                        {{ create_form.served_by }}
+                        <label>Served day period</label>
+                        {{ create_form.served_date }}
+                        <label>Served day</label>
+                        {{ create_form.served_day }}
+                        <label>Note</label>
+                        {{ create_form.notes }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--Modal-Update-->
+    <div class="modal fade" id="mealDistributionModal" tabindex="-1" role="dialog"
+         aria-labelledby="createMealDistributionModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" id="MealDistributionCreateForm">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mealDistributionModalLabel">Update Meal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="id_name">Meal name</label>
+                            {{ form.meal|add_class:"form-control" }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_estimate_portion">Group</label>
+                            {{ form.group|add_class:"form-control" }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_estimate_portion">Served by</label>
+                            {{ form.served_by|add_class:"form-control" }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_cooked_by">Served date</label>
+                            {{ form.served_date|add_class:"form-control" }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_ingredients">Served day</label>
+                            {{ form.served_day|add_class:"form-control" }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_ingredients">Note</label>
+                            {{ form.notes|add_class:"form-control" }}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="{% url 'mealDistribution' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal-Delete-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form method="POST" id="deleteForm" action="">
+                {% csrf_token %}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete meal?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure wanna delete <strong id="mealNameToDelete"></strong>?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+{% endblock content%}
+
+
+{% block scripts %}
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+</script>
+{% if form %}
+<script>
+    $(document).ready(function () {
+        $('#mealDistributionModal').modal('show');
+    });
+</script>
+{% endif %}
+<script>
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        let button = $(event.relatedTarget);
+        let mealName = button.data('meal');
+        let actionUrl = button.data('url');
+
+        let modal = $(this);
+        modal.find('#mealNameToDelete').text(mealName);
+        modal.find('#deleteForm').attr('action', actionUrl);
+    });
+</script>
+
+{% endblock scripts %}
+
+

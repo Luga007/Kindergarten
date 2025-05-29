@@ -1,0 +1,446 @@
+{% extends 'base.html'%}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+<div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="index3.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="#" class="nav-link">Contact</a>
+            </li>
+
+
+        </ul>
+
+        <!-- SEARCH FORM -->
+
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+            <a class="nav-link" href="{% url 'check_inventory_and_alert' %}">
+                <i class="far fa-comments"></i>
+            </a>
+
+
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <span class="dropdown-item dropdown-header">15 Notifications</span>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-envelope mr-2"></i> 4 new messages
+                    <span class="float-right text-muted text-sm">3 mins</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-users mr-2"></i> 8 friend requests
+                    <span class="float-right text-muted text-sm">12 hours</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fas fa-file mr-2"></i> 3 new reports
+                    <span class="float-right text-muted text-sm">2 days</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+            </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                    <i class="fas fa-th-large"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background: #191c1c">
+        <!-- Brand Logo -->
+        <a href="../../index3.html" class="brand-link">
+            <img src="{% static 'img/logo-template-for-children-s-business-kindergarten-school-training-vector.jpg' %}"
+                 alt="AdminLTE Logo"
+                 class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">Kindergarten</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="{% static 'img/medieval-knight-armor_1308-174955.avif' %}" class="img-circle elevation-2"
+                         alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block">Alexander Pierce</a>
+                </div>
+            </div>
+
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <li class="nav-item">
+                        <a href="{% url 'index' %}" class="nav-link">
+                            <i class="nav-icon fas fa-home"></i>
+                            <p>
+                                Main page
+                            </p>
+                        </a>
+                    </li>
+
+                    {% if user_role == 'admin' %}
+                    <li class="nav-item">
+                        <a href="{% url 'caretakerpage' %}" class="nav-link">
+                            <i class="nav-icon fas fas fa-user-nurse"></i>
+                            <p>
+                                Caretaker page
+                            </p>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if user_role == 'caretaker' or user_role == 'admin' %}
+
+                    <li class="nav-item">
+                        <a href="{% url 'kids_page' %}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Kids page
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'parent_page' %}" class="nav-link">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <p>
+                                Parent page
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'attendance_page' %}" class="nav-link">
+                            <i class="nav-icon fas 	fa-clipboard-check"></i>
+                            <p>
+                                Attendance page
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'group_data_page' %}" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Group page
+                            </p>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if user_role == 'chief' or user_role == 'admin' %}
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-box"></i>
+                            <p>
+                                Product pages
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{% url 'mealData' %}" class="nav-link">
+                                    <i class="nav-icon fas fa-utensils"></i>
+                                    <p>Meal page</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'mealIngredientPage' %}" class="nav-link">
+                                    <i class="fas fa-seedling"></i>
+                                    <p>Meal Ingredient page</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'ingredientPage' %}" class="nav-link">
+                                    <i class="nav-icon fas fa-carrot"></i>
+                                    <p>Ingredient page </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'mealDistribution' %}" class="nav-link">
+                                    <i class="nav-icon fas fa-concierge-bell"></i>
+                                    <p>MealDistribution</p>
+                                </a>
+                            </li>
+                        </ul>
+                    <li class="nav-item">
+                        <a href="{% url 'cookMealView' %}" class="nav-link">
+                            <i class="fas fa-hotdog"></i>
+                            <p>Cooking Meal</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'inventory_page' %}" class="nav-link">
+                            <i class="nav-icon fas fa-boxes"></i>
+                            <p>
+                                Inventory page
+                            </p>
+                        </a>
+                    </li>
+                    {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Group</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Groups</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Groups</h3>
+
+                </div>
+                <div class="card-body p-0">
+                    <div class="mb-3 d-flex justify-content-end">
+                        {% if user_role == 'admin' %}
+                        <button class="btn btn-success" data-toggle="modal" style="background: #198754"
+                                data-target="#createGroupModal">
+                            <i class="fas fa-plus"></i> Create Group
+                        </button>
+                        {% endif %}
+                    </div>
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th style="width: 3%; background: #191c1c">#</th>
+                            <th style="width: 15%;background: #191c1c">Groups name</th>
+                            <th style="width: 15%; background: #191c1c">Caretaker</th>
+                            <th style="width: 20%; background: #191c1c">Room</th>
+                            <th style="width: 10%; background: #191c1c">Total quantity</th>
+                            {% if user_role == 'admin' %}
+                            <th style="width: 10%; background: #191c1c">action</th>
+                            {% endif %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for group in groups %}
+                        <tr>
+                            <td>{{ group.id }}</td>
+                            <td>{{ group.group_name }}</td>
+                            <td>{{ group.caretakers }}</td>
+                            <td>{{ group.room }}</td>
+                            <td>{{ group.total_quantity }}</td>
+                            {% if user_role == 'admin' %}
+                            <td class="text-center">
+                                <a href="?edit_group_id={{ group.id }}" class="btn btn-sm btn-info">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal"
+                                   data-id="{{ group.id }}" data-group-name="{{ group.group_name }}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+
+                            </td>
+                            {% endif %}
+
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0-rc
+        </div>
+        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Modal update-->
+    <div class="modal fade" id="groupModal" tabindex="-1" role="dialog" aria-labelledby="groupModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" id="GroupForm">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="groupModalLabel">Update Meal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="id_name">Group name</label>
+                            {{ form.group_name|add_class:"form-control" }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_estimate_portion">Caretaker</label>
+                            {{ form.caretakers|add_class:"form-control" }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_cooked_by">Room</label>
+                            {{ form.room|add_class:"form-control" }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_ingredients">Total quantity</label>
+                            {{ form.total_quantity|add_class:"form-control" }}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="{% url 'group_data_page' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal-delete-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form method="POST" id="deleteForm" action="">
+                {% csrf_token %}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete meal?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure wanna delete <strong id="groupNameToDelete"></strong>?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--Modal-Create-->
+    <div class="modal fade" id="createGroupModal" tabindex="-1" role="dialog"
+         aria-labelledby="createGroupModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form method="POST" action="{% url 'group_data_page' %}">
+                {% csrf_token %}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createGroupModalLabel">Create a new Meal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label>Grop Name</label>
+                        {{ create_form.group_name|add_class:"form-control" }}
+                        <label>Caretaker</label>
+                        {{ create_form.caretakers|add_class:"form-control" }}
+                        <label>Room</label>
+                        {{ create_form.room|add_class:"form-control" }}
+                        <label>Total quantity</label>
+                        {{ create_form.total_quantity|add_class:"form-control" }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+{% endblock content%}
+
+
+{% block scripts %}
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+
+{% if form %}
+<script>
+    $(document).ready(function () {
+        $('#groupModal').modal('show');
+    });
+</script>
+{% endif %}
+<script>
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        let button = $(event.relatedTarget);
+        let groupId = button.data('id');
+        let groupName = button.data('group-name');
+
+        let modal = $(this);
+        modal.find('#groupNameToDelete').text(groupName);
+
+        let urlTemplate = "{% url 'delete_group' group_id=0 %}";
+        let actionUrl = urlTemplate.replace('0', groupId);
+        modal.find('#deleteForm').attr('action', actionUrl);
+    });
+
+</script>
+{% endblock scripts %}
+
+
